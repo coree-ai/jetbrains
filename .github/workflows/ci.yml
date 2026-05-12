@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('mcp.json', 'utf8'))"
+          echo "mcp.json is valid"
+
+      - name: Check version consistency with README
+        run: |
+          MCP_VER=$(node -e "const c=JSON.parse(require('fs').readFileSync('mcp.json','utf8')); console.log(c.mcpServers.coree.args.find(a=>a.startsWith('@coree-ai/coree@')).replace('@coree-ai/coree@',''))")
+          grep -q "@coree-ai/coree@${MCP_VER}" README.md || (echo "README version mismatch" && exit 1)
+          echo "Version $MCP_VER consistent in mcp.json and README"
