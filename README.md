@@ -16,7 +16,7 @@ Persistent memory and code intelligence for AI agents in JetBrains IDEs with
 4. Enter:
    - **Name**: `coree`
    - **Command**: `npx`
-   - **Arguments**: `--yes @coree-ai/coree@0.13.0 serve`
+   - **Arguments**: `--yes @coree-ai/coree@0.14.1 serve`
 5. Click **OK** and restart the IDE.
 
 ### Option B - Config file
@@ -43,7 +43,7 @@ The `mcp.json` content:
   "mcpServers": {
     "coree": {
       "command": "npx",
-      "args": ["--yes", "@coree-ai/coree@0.13.0", "serve"],
+      "args": ["--yes", "@coree-ai/coree@0.14.1", "serve"],
       "env": {
         "COREE__MEMORY__REMOTE_AUTH_TOKEN": "${COREE__MEMORY__REMOTE_AUTH_TOKEN}",
         "COREE__MEMORY__REMOTE_URL": "${COREE__MEMORY__REMOTE_URL}"
